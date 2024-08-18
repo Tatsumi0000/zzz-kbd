@@ -31,6 +31,11 @@ make ino:jis-default        ← JIS配列
 マイコンへの書込みは以下の手順で行います。
 
 ### 1. 書込みコマンドを入力
+[QMK Toolboxでファームウェアを書き込む | yfuku docs](https://kbd.dailycraft.jp/claw44/buildguide/10_firmware/toolbox/) を参考に書き込みます。M1 Macでは以前のやり方は書き込めませんでしたが、QMK Toolboxでの書き込みはできました。
+
+<details>
+    <summary>動かなかったやり方（以前のやり方）</summary>
+
 ビルド時と同様にコマンドを入力しますが、書き込みプログラム名の指定として`:avrdude`を末尾に追加します。<br>
 
 ```
@@ -66,6 +71,7 @@ avrdude done.  Thank you.
 ```
 
 書込みができないときは、リセットボタンを押す間隔を調整したり、10秒以上待ってからもう一度試してみてください。
+</details>
 
 ## カスタマイズについて
 
