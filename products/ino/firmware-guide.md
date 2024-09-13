@@ -31,10 +31,26 @@ make ino:jis-default        ← JIS配列
 マイコンへの書込みは以下の手順で行います。
 
 ### 1. 書込みコマンドを入力
-[QMK Toolboxでファームウェアを書き込む | yfuku docs](https://kbd.dailycraft.jp/claw44/buildguide/10_firmware/toolbox/) を参考に書き込みます。M1 Macでは以前のやり方は書き込めませんでしたが、QMK Toolboxでの書き込みはできました。
+[QMK Toolboxでファームウェアを書き込む | yfuku docs](https://kbd.dailycraft.jp/claw44/buildguide/10_firmware/toolbox/) を参考に書き込みます。M1 Macでは以前のやり方は書き込めませんでしたが、QMK Toolboxでの書き込みはできました。(atmega32u4-auにはブートローダーにDFUをデフォルトで入ってるのが原因かも。ISPなどでブートローダーを書き換えてあげると`以前のやり方`でも動くかも)
+
+#### 2度目以降に書き込みたい場合 
+US配列前提で書いています。まずは、ビルドします。
+```
+make ino:default:dfu
+```
+すると、以下のような表示がされるはずです。
+```
+dfu-programmer: no device present.
+Error: Bootloader not found. Trying again in 5s.
+```
+書き込むために、ブートローダに入ります。スペースキーを押しながら、USBケーブルを抜き差ししてください。すると書き込みが始まります。
+スペースキー以外でブートローダに入りたい場合は、`config.h`の`BOOTMAGIC_KEY_BOOTLOADER`に任意のキーを割り当ててください。割り当てるときは絶対に存在するであろうキーを割り当てることをおすすめします。
+
+上記以外のやり方だと、USBケーブルを接続したまま、RSTキーを割り当てられているキー（デフォルトのキーマップだと`Raiseキー`と`` `キー ``同時押し）を押すとブートローダに入って書き込みが始まります。
+
 
 <details>
-    <summary>動かなかったやり方（以前のやり方）</summary>
+    <summary>動かなかったやり方（以前のやり方？）</summary>
 
 ビルド時と同様にコマンドを入力しますが、書き込みプログラム名の指定として`:avrdude`を末尾に追加します。<br>
 
